@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Sam-sys
+ * @category   samsys
+ * @package    samsys_nivobanner
+ * @copyright  Copyright (c) 2010-2011 Unicode Systems. (http://www.sam-sys.in)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+ -->
+<layout version="0.1.0">
+    <nivobanner_adminhtml_nivobanner_index>
+        <reference name="content">
+            <block type="nivobanner/adminhtml_nivobanner" name="nivobanner" />
+        </reference>
+    </nivobanner_adminhtml_nivobanner_index>
+    <nivobanner_adminhtml_nivobannergroup_index>
+        <reference name="content">
+            <block type="nivobanner/adminhtml_nivobannergroup" name="nivobannergroup" />
+        </reference>
+    </nivobanner_adminhtml_nivobannergroup_index>
+    <nivobanner_adminhtml_nivobanner_edit>
+        <update handle="editor"/>
+    </nivobanner_adminhtml_nivobanner_edit>
+</layout>

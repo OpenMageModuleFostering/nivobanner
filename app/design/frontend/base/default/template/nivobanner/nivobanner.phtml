@@ -1,0 +1,124 @@
+<?php
+/**
+ * Unicode Systems
+ * @category   Uni
+ * @package    Uni_Banner
+ * @copyright  Copyright (c) 2010-2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->getSkinUrl('nivobanner/nivo-slider.css') ?>" />
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->getSkinUrl('nivobanner/themes/default/default.css') ?>" />
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->getSkinUrl('nivobanner/themes/light/light.css') ?>" />
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->getSkinUrl('nivobanner/themes/dark/dark.css') ?>" />
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->getSkinUrl('nivobanner/themes/bar/bar.css') ?>" />
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('nivobanner/js/jquery-1.9.0.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('nivobanner/js/jquery.nivo.slider.js') ?>"></script>
+<?php
+
+$bannerGroupCode = $this->getBannerGroupCode();
+$data = $this->getDataByGroupCode($bannerGroupCode);
+
+$bannerGroupData = $data['group_data'];
+
+$bannerWidth = $bannerGroupData->getBannerWidth();
+$bannerHeight = $bannerGroupData->getBannerHeight();
+$bannerTheme = $bannerGroupData->getTheme();
+$imageWidth = ((int) $bannerWidth);
+$imageHeight = ((int) $bannerHeight);
+$mediaDir = Mage::getBaseDir('media');
+if(($bannerTheme=='dark')||($bannerTheme=='light'))
+{
+	$styleNWH = 'width: ' . ((int) $bannerWidth) . 'px; height: ' . ((int) $bannerHeight + 30) . 'px;';
+}
+else{
+	$styleNWH = 'width: ' . ((int) $bannerWidth) . 'px; height: ' . ((int) $bannerHeight) . 'px;';
+}
+
+$styleWH = 'width: ' . $imageWidth . 'px !important; height: ' . $imageHeight . 'px !important;';
+
+$bannerData = $data['banner_data'];
+
+?>
+<style type="text/css">
+    .<? echo $bannerGroupCode; ?> .slider-wrapper {<?php echo $styleNWH; ?>;}
+    #slider-<? echo $bannerGroupCode; ?> img{<?php echo $styleWH; ?>}
+</style>
+
+<script type="text/javascript">// <![CDATA[
+jQuery.noConflict();
+jQuery(window).load(function() {
+jQuery('#slider-<? echo $bannerGroupCode; ?>').nivoSlider({
+
+effect:'<? echo $bannerGroupData->getBannerEffects(); ?>',
+ animSpeed: <? echo $bannerGroupData->getAnimationSpeed(); ?>, 
+ pauseTime: <? echo $bannerGroupData->getPauseTime(); ?>,
+ pauseOnHover: <? if($bannerGroupData->getHoverPause()=='0'){?>false <? } if($bannerGroupData->getHoverPause()=='1'){ ?>true <? } ?>,
+ directionNav: <? if($bannerGroupData->getImageNav()=='0'){?>false <? } if($bannerGroupData->getImageNav()=='1'){ ?>true <? } ?>, 
+ manualAdvance: <? if($bannerGroupData->getAutoplay()=='1'){?>false <? } if($bannerGroupData->getAutoplay()=='0'){ ?>true <? } ?>, 
+ controlNavThumbs: false,
+ controlNav: <? if($bannerGroupData->getImagePagi()=='0'){?>false <? } if($bannerGroupData->getImagePagi()=='1'){ ?>true <? } ?>,
+});
+
+});
+// ]]>
+</script>
+
+<? if($bannerGroupData->getStatus()=='1'):?>
+
+
+<div class="<? echo $bannerGroupCode; ?>">
+<div  class="slider-wrapper <? echo $bannerGroupCode; ?> theme-<? echo $bannerGroupData->getTheme();?>">
+	<div id="slider-<? echo $bannerGroupCode; ?>" class="nivoSlider">
+<? $s=1;
+ foreach ($bannerData as $banner):
+
+ 	$bannerPath = $banner->getFilename();
+    $bannerTitle = $banner->getTitle();
+	 $bannerContent = $banner->getBannerContent();
+    $bannerLink = $banner->getLink();
+	$bannerStatus = $banner->getStatus();
+	$bannerTarget = $banner->getLinkTarget();
+	$bannerShowTitle = $banner->getShowTitle();
+	$bannerShowContent = $banner->getShowContent();
+	 if($bannerStatus=='1')
+	 {
+						if ($bannerPath != '' && @file_exists($mediaDir . DS . $bannerPath)) :
+					   		$bannerImage_thumb = $this->getResizedUrl($bannerPath,$bannerGroupCode, $imageWidth, $imageHeight); /*magento image resize*/
+						endif;
+?>
+ <? if($bannerLink): ?>
+ <a  href="<? echo $bannerLink; ?>" target="<? if($bannerTarget=='0'){ echo '_self'; } if($bannerTarget=='1') { echo '_blank'; } ?>">
+ <img src="<?php echo $bannerImage_thumb; ?>"  data-thumb="<?php echo $bannerImage_thumb; ?>" <? if(($bannerShowTitle=='1')||($bannerShowContent=='1')): ?> title="#<? echo $s; ?>"  <? endif;  ?> alt="<?php echo $bannerTitle; ?>"/>
+ </a>
+ <? else: ?>	
+ <img src="<?php echo $bannerImage_thumb; ?>"  <? if(($bannerShowTitle=='1')||($bannerShowContent=='1')): ?> title="#<? echo $s; ?>"  <? endif;  ?> data-thumb="<?php echo $bannerImage_thumb ?>"   alt="<?php echo $bannerTitle; ?>"/>
+ <? endif;  ?>
+
+ <?php
+ }
+ $s++;
+ endforeach;
+ ?>
+ 	</div>
+	<? $k=1;  foreach ($bannerData as $banner_cont):
+	
+	$bannerShowTitle_cont = $banner_cont->getShowTitle();
+	$bannerShowContent_cont = $banner_cont->getShowContent();
+	 $bannerTitle_cont = $banner_cont->getTitle();
+	 $bannerContent_cont = $banner_cont->getBannerContent();
+	if(($bannerShowTitle_cont=='1')||($bannerShowContent_cont=='1'))
+	{
+	 ?>
+ 
+	<div id="<? echo $k; ?>" class="nivo-html-caption">
+		 <? if($bannerShowTitle_cont=='1'): ?>  <strong> <? echo $bannerTitle_cont; ?>  </strong><br/><? endif;  ?>
+         <? if($bannerShowContent_cont=='1'): ?>   <? echo $bannerContent_cont; ?> <? endif;  ?>
+    </div>
+	 <?php
+ 	} $k++;
+ endforeach;
+ ?>
+</div>
+</div>
+<? endif; ?>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Sam-sys
+ * @category   nivobanner
+ * @package    Samsys_Nivobanner
+ * @copyright  Copyright (c) 2010-2011 sam-sys pvt ltd. (http://www.sam-sys.in)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+ -->
+<layout version="0.1.0">
+
+    <nivobanner_index_index>
+	  <reference name="content">
+            <block type="nivobanner/nivobanner" name="nivobanner.home"  template="nivobanner/nivobanner.phtml" >
+			</block>
+        </reference>
+    </nivobanner_index_index>
+</layout>

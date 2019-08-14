@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Sam-sys
+ * @category   Samsys
+ * @package    samsys_nivobanner
+ * @copyright  Copyright (c) 2010-2011 sam-sys pvt ltd. (http://www.sam-sys.in)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+ -->
+<config>
+    <modules>
+        <Samsys_Nivobanner>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Samsys_Nivobanner>
+    </modules>
+</config> 
