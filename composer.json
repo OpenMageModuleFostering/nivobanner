@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/Nivobanner",
+    "name": "OpenMageModuleFostering\/Nivobanner",
     "type": "magento-module",
     "license": "OSL-v3.0",
     "homepage": "",
     "description": "Nivo-banner offers nivo slider effects for your banner.",
     "authors": [
-    {
-        "name": "sam-sys pvt ltd",
-        "email": "dkfranc@ymail.com"
-    }
-],
+        {
+            "name": "sam-sys pvt ltd",
+            "email": "dkfranc@ymail.com"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
